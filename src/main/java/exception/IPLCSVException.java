@@ -6,7 +6,7 @@ public class IPLCSVException extends Exception {
         this.type = ExceptionType.valueOf(name);
     }
     public enum ExceptionType {
-        CENSUS_FILE_PROBLEM, UNABLE_TO_PARSE,NO_CENSUS_DATA,ISSUE_IN_FILE,INVALID_COUNTRY,NO_SUCH_FILE,
+        CENSUS_FILE_PROBLEM, UNABLE_TO_PARSE,NO_CENSUS_DATA,ISSUE_IN_FILE,NO_SUCH_FILE,
         INTERNAL_FILE_PROBLEM;
     }
     public ExceptionType type;

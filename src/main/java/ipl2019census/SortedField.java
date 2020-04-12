@@ -1,5 +1,8 @@
 package ipl2019census;
 
+import dao.IPLRecordDAO;
+import dao.MostRunCSV;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,14 +18,14 @@ public class SortedField {
 
     public static Comparator getField(SortedField.Field field)
     {
-        Comparator<MostRunCSV> averageComparator = Comparator.comparing(census -> census.avg);
-        Comparator<MostRunCSV> strikeRateComparator = Comparator.comparing(census -> census.strikeRate);
-        Comparator<MostRunCSV> maxrunComparator = Comparator.comparing(census -> census.run);
+        Comparator<IPLRecordDAO> averageComparator = Comparator.comparing(census -> census.average);
+        Comparator<IPLRecordDAO> strikeRateComparator = Comparator.comparing(census -> census.strikeRate);
+        Comparator<IPLRecordDAO> maxrunComparator = Comparator.comparing(census -> census.runs);
         sortFieldComparator.put(Field.AVERAGE, averageComparator);
         sortFieldComparator.put(Field.STRIKE_RATE, strikeRateComparator);
         sortFieldComparator.put(Field.SIXES_AND_FOURS, new FieldComparator());
         sortFieldComparator.put(Field.MAXRUN_WITH_GREATAVG, maxrunComparator.thenComparing(averageComparator));
-        Comparator<MostRunCSV> csvComparator = sortFieldComparator.get(field);
+        Comparator<IPLRecordDAO> csvComparator = sortFieldComparator.get(field);
         return csvComparator;
     }
 }
