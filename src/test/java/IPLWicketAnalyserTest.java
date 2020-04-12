@@ -81,4 +81,16 @@ public class IPLWicketAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLMostWktsCSVFile_WhenSortedOnStrikeRate_ShouldReturnCorrectSortedData() {
+        try {
+            censusAnalyser.loadIPLMostWktsData(IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH);
+            String playerRecord = censusAnalyser.getSortedDataOfIpl(SortedField.Field.STRIKE_RATE);
+            MostWktCSV[] mostRunCSVS = new Gson().fromJson(playerRecord, MostWktCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham", mostRunCSVS[mostRunCSVS.length - 1].player);
+        } catch (IPLCSVException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
