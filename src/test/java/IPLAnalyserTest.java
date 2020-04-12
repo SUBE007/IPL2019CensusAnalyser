@@ -112,4 +112,16 @@ public class IPLAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCensusMostRunsData_ShouldReturnTopPlayersWithGreatAvg_WithStrikeRate_WhenSortedOnIt() {
+        try {
+            censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
+            String playersData = censusAnalyser.getSortedDataOfIpl(SortedField.Field.GREATAVG_WITH_STRIKERATE);
+            MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
+            Assert.assertEquals("MS Dhoni", AverageRuns[AverageRuns.length - 1].player);
+        }catch (IPLCSVException e){
+            e.printStackTrace();
+        }
+    }
 }
