@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import exception.IPLCSVException;
 import ipl2019census.IPLCensusAnalyser;
-import ipl2019census.MostRunCSV;
+import dao.MostRunCSV;
 import ipl2019census.SortedField;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,10 +10,10 @@ import org.junit.rules.ExpectedException;
 
 public class IPLAnalyserTest {
     public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostRuns.csv";
-    public static String IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH="resources/IPL2019FactsheetMostWkts.csv";
     public static String  WRONG_CSV_FILE_PATH="E:\\BridgrLabz\\IPL2019Census\\src\\IPL2019FactsheetMostRuns.csv";
     public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH_WRONGDELIMETER ="resources/IPL2019FactsheetMostRunsWithWrongDelimiter.csv";
     public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH_WITHOUT_HEADER="resources/IPL2019FactsheetMostRunsWithOutHeader.csv";
+
     IPLCensusAnalyser censusAnalyser;
 
     @Before
@@ -22,7 +22,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIplCenusMostRunsCsvFile_ReturnCorrectNoOfRecords() {
+    public void givenIplCensusMostRunsCsvFile_ReturnCorrectNoOfRecords() {
         try {
              int numOfRecords = censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
              Assert.assertEquals(100,numOfRecords);
@@ -136,4 +136,6 @@ public class IPLAnalyserTest {
             e.printStackTrace();
         }
     }
+
+
 }
