@@ -117,4 +117,16 @@ public class IPLWicketAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLMostWicketCSVFile_WhenSortedOnBestAvgBowler_WithStrikeRate_ShouldReturnCorrectData() {
+        try {
+            censusAnalyser.loadIPLMostWktsData(IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH);
+            String iplpLayersRecords = censusAnalyser.getSortedDataOfIpl(SortedField.Field.AVGBOWL_WITH_STRIKERATE);;
+            MostWktCSV[] mostRunCSVS = new Gson().fromJson(iplpLayersRecords, MostWktCSV[].class);
+            Assert.assertEquals("Suresh Raina", mostRunCSVS[0].player);
+        } catch (IPLCSVException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
