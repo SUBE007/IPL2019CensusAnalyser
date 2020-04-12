@@ -10,7 +10,7 @@ import java.util.Map;
 public class SortedField {
     public enum Field {
         AVERAGE,STRIKE_RATE,SIXES_AND_FOURS,CENTUARY, FOURS, HALFCENTUARY, HIGHSCORE, SIX, RUN,
-        SIX_AND_FOUR_WITH_STRIKERATE,GREATAVG_WITH_STRIKERATE,MAXRUN_WITH_GREATAVG;
+        SIX_AND_FOUR_WITH_STRIKERATE,GREATAVG_WITH_STRIKERATE,MAXRUN_WITH_GREATAVG,ECONOMY;
     }
     static Map<Field, Comparator> sortFieldComparator = new HashMap<>();
 
@@ -21,8 +21,10 @@ public class SortedField {
         Comparator<IPLRecordDAO> averageComparator = Comparator.comparing(census -> census.average);
         Comparator<IPLRecordDAO> strikeRateComparator = Comparator.comparing(census -> census.strikeRate);
         Comparator<IPLRecordDAO> maxrunComparator = Comparator.comparing(census -> census.runs);
+        Comparator<IPLRecordDAO> economyComparator = Comparator.comparing(census -> census.economy);
         sortFieldComparator.put(Field.AVERAGE, averageComparator);
         sortFieldComparator.put(Field.STRIKE_RATE, strikeRateComparator);
+        sortFieldComparator.put(Field.ECONOMY, economyComparator);
         sortFieldComparator.put(Field.SIXES_AND_FOURS, new FieldComparator());
         sortFieldComparator.put(Field.MAXRUN_WITH_GREATAVG, maxrunComparator.thenComparing(averageComparator));
         Comparator<IPLRecordDAO> csvComparator = sortFieldComparator.get(field);

@@ -24,6 +24,9 @@ public class MostWktCSV {
     @CsvBindByName(column = "Avg", required = true)
     public double average;
 
+    @CsvBindByName(column = "Econ", required = true)
+    public double economy;
+
     @CsvBindByName(column = "SR", required = true)
     public double strikeRate;
 

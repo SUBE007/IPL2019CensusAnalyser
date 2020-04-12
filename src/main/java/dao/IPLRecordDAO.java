@@ -7,6 +7,7 @@ public class IPLRecordDAO {
     public int runs;
     public double strikeRate;
     public double average;
+    public double economy;
     public int fours;
     public int six;
     public int wkts;
@@ -27,6 +28,7 @@ public class IPLRecordDAO {
         runs = mostWktsCSV.runs;
         strikeRate = mostWktsCSV.strikeRate;
         average = mostWktsCSV.average;
+        this.economy=mostWktsCSV.economy;
         wkts = mostWktsCSV.wkts;
         fourWkts = mostWktsCSV.fourWkts;
         fiveWkts = mostWktsCSV.fiveWkts;
