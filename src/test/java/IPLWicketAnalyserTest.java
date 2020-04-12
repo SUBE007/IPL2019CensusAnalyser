@@ -6,9 +6,11 @@ import ipl2019census.SortedField;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class IPLWicketAnalyserTest {
     public static String IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostWkts.csv";
+    public static String  WRONG_CSV_FILE_PATH="E:\\BridgrLabz\\IPL2019Census\\src\\IPL2019FactsheetMostWkts.csv";
     public static String IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH_WRONGDELIMETER="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostWktsWithWrongDelimiter.csv";
 
 
@@ -42,4 +44,17 @@ public class IPLWicketAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIplCensusMostWicketsData_WithWrongFile_ShouldThrowException() {
+        try {
+
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(IPLCSVException.class);
+            censusAnalyser.loadIPLMostWktsData(WRONG_CSV_FILE_PATH);
+        } catch (IPLCSVException e) {
+            Assert.assertEquals(IPLCSVException.ExceptionType.NO_SUCH_FILE,e.type);
+        }
+    }
+
 }
