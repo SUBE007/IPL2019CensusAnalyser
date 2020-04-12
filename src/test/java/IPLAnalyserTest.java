@@ -90,10 +90,22 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLCensusMostRunsData_ShouldReturnTopPlayersWithMostSixAndFours_WhenSortedOnIt() throws IPLCSVException{
+    public void givenIPLCensusMostRunsData_ShouldReturnTopPlayersWithMostSixAndFours_WhenSortedOnIt() {
         try {
             censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
             String playersData = censusAnalyser.getSortedDataOfIpl(SortedField.Field.SIXES_AND_FOURS);
+            MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
+            Assert.assertEquals("Andre Russell", AverageRuns[AverageRuns.length - 1].player);
+        }catch (IPLCSVException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCensusMostRunsData_ShouldReturnTopPlayersWithMostSixAndFours_WithStrikeRate_WhenSortedOnIt() {
+        try {
+            censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
+            String playersData = censusAnalyser.getSortedDataOfIpl(SortedField.Field.SIX_AND_FOUR_WITH_STRIKERATE);
             MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
             Assert.assertEquals("Andre Russell", AverageRuns[AverageRuns.length - 1].player);
         }catch (IPLCSVException e){
