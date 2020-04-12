@@ -2,6 +2,7 @@ import com.google.gson.Gson;
 import exception.IPLCSVException;
 import ipl2019census.IPLCensusAnalyser;
 import ipl2019census.MostRunCSV;
+import ipl2019census.SortedField;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class IPLAnalyserTest {
     public void givenIPLCensusMostRunsData_ShouldReturnTopBattingAverages_WhenSortedOnIt() {
         try{
             censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
-            String playersData =  censusAnalyser.getAverageSortedRunOfIpl();
+            String playersData =  censusAnalyser.getSortedDataOfIpl(SortedField.Field.AVERAGE);
             MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
             Assert.assertEquals("MS Dhoni", AverageRuns[AverageRuns.length-1].player);
         }catch (IPLCSVException e){
@@ -80,9 +81,21 @@ public class IPLAnalyserTest {
     public void givenIPLCensusMostRunsData_ShouldReturnTop_StrikeRate_WhenSortedOnIt() {
         try{
             censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
-            String playersData =  censusAnalyser.getAverageSortedRunOfIpl();
+            String playersData =  censusAnalyser.getSortedDataOfIpl(SortedField.Field.STRIKE_RATE);
             MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
             Assert.assertEquals("Ishant Sharma", AverageRuns[AverageRuns.length-1].player);
+        }catch (IPLCSVException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCensusMostRunsData_ShouldReturnTopPlayersWithMostSixAndFours_WhenSortedOnIt() throws IPLCSVException{
+        try {
+            censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
+            String playersData = censusAnalyser.getSortedDataOfIpl(SortedField.Field.SIXES_AND_FOURS);
+            MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
+            Assert.assertEquals("Andre Russell", AverageRuns[AverageRuns.length - 1].player);
         }catch (IPLCSVException e){
             e.printStackTrace();
         }
