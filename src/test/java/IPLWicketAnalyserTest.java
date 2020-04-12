@@ -57,4 +57,16 @@ public class IPLWicketAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIplCensusMostWicketsData_WithWrongDelimeterFile_ShouldThrowException() {
+        try {
+
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(IPLCSVException.class);
+            censusAnalyser.loadIPLMostWktsData(IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH_WRONGDELIMETER);
+        } catch (IPLCSVException e) {
+            Assert.assertEquals(IPLCSVException.ExceptionType.DELIMETER_PROBLEM,e.type);
+        }
+    }
+
 }
