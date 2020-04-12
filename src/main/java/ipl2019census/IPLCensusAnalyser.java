@@ -35,8 +35,6 @@ public class IPLCensusAnalyser {
         return 0;
     }
 
-
-    //public static List<MostRunCSV> runCSVList = new ArrayList<MostRunCSV>();
     public static Map<String, MostRunCSV> runCSVMap = new HashMap<>();
     public String getSortedDataOfIpl(SortedField.Field sixesAndFours) throws IPLCSVException {
         Comparator<MostRunCSV> censusComparator = null;
@@ -48,9 +46,6 @@ public class IPLCensusAnalyser {
                 sorted(censusComparator).collect(Collectors.toCollection(ArrayList::new));
         String sortedJsonData = new Gson().toJson(runCSVList);
         return  sortedJsonData;
-
     }
 
-     {
-    }
 }

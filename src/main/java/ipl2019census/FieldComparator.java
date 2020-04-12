@@ -9,5 +9,4 @@ public class FieldComparator implements Comparator<MostRunCSV> {
         return (((mostRunCSV1.six * 6) + (mostRunCSV1.fours * 4)) - ((mostRunCSV2.six * 6) + (mostRunCSV2.fours * 4)));
     }
 
-
 }
