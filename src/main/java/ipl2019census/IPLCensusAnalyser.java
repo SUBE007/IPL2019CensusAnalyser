@@ -10,10 +10,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class IPLCensusAnalyser {
     public int loadIPLMostRunsData(String csvFilePath) throws IPLCSVException {
@@ -23,7 +21,7 @@ public class IPLCensusAnalyser {
             Iterator<MostRunCSV> mostRunCSVIterator = csvBuilder.getCSVFileIterator(reader, MostRunCSV.class);
             while (mostRunCSVIterator.hasNext()) {
                 MostRunCSV mostRunCSV=mostRunCSVIterator.next();
-                runCSVList.add(mostRunCSV);
+                runCSVMap.put(mostRunCSV.player, mostRunCSV);
                 count++;
             }
             return count;
@@ -38,11 +36,21 @@ public class IPLCensusAnalyser {
     }
 
 
-    public static List<MostRunCSV> runCSVList = new ArrayList<MostRunCSV>();
-    public String getAverageSortedRunOfIpl( ) {
-            runCSVList.sort(Comparator.comparing(mostRunCSV -> mostRunCSV.strikeRate));
-            String sortedJsonData = new Gson().toJson(runCSVList);
-            return  sortedJsonData;
+    //public static List<MostRunCSV> runCSVList = new ArrayList<MostRunCSV>();
+    public static Map<String, MostRunCSV> runCSVMap = new HashMap<>();
+    public String getSortedDataOfIpl(SortedField.Field sixesAndFours) throws IPLCSVException {
+        Comparator<MostRunCSV> censusComparator = null;
+        if (runCSVMap == null || runCSVMap.size() == 0) {
+            throw new IPLCSVException("NO_CENSUS_DATA", IPLCSVException.ExceptionType.NO_CENSUS_DATA);
+        }
+        censusComparator =  SortedField.getField(sixesAndFours);
+        ArrayList runCSVList = runCSVMap.values().stream().
+                sorted(censusComparator).collect(Collectors.toCollection(ArrayList::new));
+        String sortedJsonData = new Gson().toJson(runCSVList);
+        return  sortedJsonData;
+
     }
 
+     {
+    }
 }

@@ -44,4 +44,19 @@ public class MostRunCSV {
 
     public MostRunCSV() {
     }
+
+    public MostRunCSV(String player, int match, int innings,int notOut, int run, String highScore, double avg, double strikeRate, int centuary, int halfCentuary, int fours, int six) {
+        this.player = player;
+        this.match = match;
+        this.innings = innings;
+        this.notOut=notOut;
+        this.run = run;
+        this.highScore = highScore;
+        this.avg = avg;
+        this.strikeRate = strikeRate;
+        this.centuary = centuary;
+        this.HalfCentuary = halfCentuary;
+        this.fours = fours;
+        this.six = six;
+     }
 }
