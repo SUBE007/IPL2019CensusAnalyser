@@ -129,4 +129,16 @@ public class IPLWicketAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLMostWicketCSVFile_WhenSortedMaximumWicket_WithBestBowling_ShouldReturnCorrectData() {
+        try {
+            censusAnalyser.loadIPLMostWktsData(IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH);
+            String iplpLayersRecords = censusAnalyser.getSortedDataOfIpl(SortedField.Field.WKT_WITH_AVG);;
+            MostWktCSV[] mostRunCSVS = new Gson().fromJson(iplpLayersRecords, MostWktCSV[].class);
+            Assert.assertEquals("Imran Tahir", mostRunCSVS[mostRunCSVS.length - 1].player);
+        } catch (IPLCSVException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
