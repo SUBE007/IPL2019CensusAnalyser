@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class IPLAnalyserTest {
-    public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH="resources/IPL2019FactsheetMostRuns.csv";
+    public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostRuns.csv";
     public static String IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH="resources/IPL2019FactsheetMostWkts.csv";
     public static String  WRONG_CSV_FILE_PATH="E:\\BridgrLabz\\IPL2019Census\\src\\IPL2019FactsheetMostRuns.csv";
     public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH_WRONGDELIMETER ="resources/IPL2019FactsheetMostRunsWithWrongDelimiter.csv";
@@ -73,6 +73,18 @@ public class IPLAnalyserTest {
             censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH_WITHOUT_HEADER);
         } catch (IPLCSVException e) {
             Assert.assertEquals(IPLCSVException.ExceptionType.ISSUE_IN_FILE,e.type);
+        }
+    }
+
+    @Test
+    public void givenIPLCensusMostRunsData_ShouldReturnTop_StrikeRate_WhenSortedOnIt() {
+        try{
+            censusAnalyser.loadIPLMostRunsData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH);
+            String playersData =  censusAnalyser.getAverageSortedRunOfIpl();
+            MostRunCSV[] AverageRuns = new Gson().fromJson(playersData, MostRunCSV[].class);
+            Assert.assertEquals("Ishant Sharma", AverageRuns[AverageRuns.length-1].player);
+        }catch (IPLCSVException e){
+            e.printStackTrace();
         }
     }
 }
