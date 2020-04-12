@@ -28,7 +28,7 @@ public class IPLCensusAnalyser {
             }
             return count;
         } catch (IOException e) {
-           throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.CENSUS_FILE_PROBLEM);
+           throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.ISSUE_IN_FILE);
         } catch (CSVBuilderException e) {
             throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.INTERNAL_FILE_PROBLEM);
         } catch (RuntimeException e) {
@@ -40,7 +40,7 @@ public class IPLCensusAnalyser {
 
     public static List<MostRunCSV> runCSVList = new ArrayList<MostRunCSV>();
     public String getAverageSortedRunOfIpl( ) {
-            runCSVList.sort(Comparator.comparing(mostRunCSV -> mostRunCSV.avg));
+            runCSVList.sort(Comparator.comparing(mostRunCSV -> mostRunCSV.strikeRate));
             String sortedJsonData = new Gson().toJson(runCSVList);
             return  sortedJsonData;
     }
