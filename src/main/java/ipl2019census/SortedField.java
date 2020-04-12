@@ -27,7 +27,7 @@ public class SortedField {
         sortFieldComparator.put(Field.ECONOMY, economyComparator);
         sortFieldComparator.put(Field.SIXES_AND_FOURS, new FieldComparator());
         sortFieldComparator.put(Field.MAXRUN_WITH_GREATAVG, maxrunComparator.thenComparing(averageComparator));
-        sortFieldComparator.put(Field.FIVEWKT_FOURWKT_STRIKERATE,new Sort5WAnd4WComparator());
+        sortFieldComparator.put(Field.FIVEWKT_FOURWKT_STRIKERATE,new Sort5WAnd4WComparator().reversed().thenComparing(strikeRateComparator));
         Comparator<IPLRecordDAO> csvComparator = sortFieldComparator.get(field);
         return csvComparator;
     }
