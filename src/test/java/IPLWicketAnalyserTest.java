@@ -93,4 +93,16 @@ public class IPLWicketAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLMOstWicketCSVFile_WhenSortedOnEconomy_ShouldReturnCorrectSortedData() {
+        try {
+            censusAnalyser.loadIPLMostWktsData(IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH);
+            String iplpLayersRecords = censusAnalyser.getSortedDataOfIpl(SortedField.Field.ECONOMY);;
+            MostWktCSV[] mostRunCSVS = new Gson().fromJson(iplpLayersRecords, MostWktCSV[].class);
+            Assert.assertEquals("Ben Cutting", mostRunCSVS[mostRunCSVS.length - 1].player);
+        } catch (IPLCSVException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
