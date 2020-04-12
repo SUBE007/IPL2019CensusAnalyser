@@ -7,7 +7,7 @@ import java.util.Map;
 public class SortedField {
     public enum Field {
          AVERAGE,STRIKE_RATE,SIXES_AND_FOURS,CENTUARY, FOURS, HALFCENTUARY, HIGHSCORE, SIX, RUN,
-        SIX_AND_FOUR_WITH_STRIKERATE;
+        SIX_AND_FOUR_WITH_STRIKERATE,GREATAVG_WITH_STRIKERATE;
     }
     static Map<Field, Comparator> sortFieldComparator = new HashMap<>();
 
@@ -20,7 +20,7 @@ public class SortedField {
         sortFieldComparator.put(Field.AVERAGE, averageComparator);
         sortFieldComparator.put(Field.STRIKE_RATE, strikeRateComparator);
         sortFieldComparator.put(Field.SIXES_AND_FOURS, new FieldComparator());
-        sortFieldComparator.put(Field.SIX_AND_FOUR_WITH_STRIKERATE, new  FieldComparator().thenComparing(strikeRateComparator));
+        sortFieldComparator.put(Field.GREATAVG_WITH_STRIKERATE, averageComparator.thenComparing(strikeRateComparator));
         Comparator<MostRunCSV> csvComparator = sortFieldComparator.get(field);
         return csvComparator;
     }
