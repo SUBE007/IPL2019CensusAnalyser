@@ -7,6 +7,8 @@ public class IPLRecordDAO {
     public int runs;
     public double strikeRate;
     public double average;
+    public double battingAverage;
+    public double bowlingAverage;
     public double economy;
     public int fours;
     public int six;
@@ -18,16 +20,16 @@ public class IPLRecordDAO {
         player = mostRunCSV.player;
         runs = mostRunCSV.run;
         strikeRate = mostRunCSV.strikeRate;
-        average = mostRunCSV.avg;
+        battingAverage = mostRunCSV.avg;
         fours = mostRunCSV.fours;
         six = mostRunCSV.six;
-    }
+     }
 
     public IPLRecordDAO(MostWktCSV mostWktsCSV) {
         player = mostWktsCSV.player;
         runs = mostWktsCSV.runs;
         strikeRate = mostWktsCSV.strikeRate;
-        average = mostWktsCSV.average;
+        bowlingAverage = mostWktsCSV.average;
         this.economy=mostWktsCSV.economy;
         wkts = mostWktsCSV.wkts;
         fourWkts = mostWktsCSV.fourWkts;
@@ -35,11 +37,12 @@ public class IPLRecordDAO {
 
     }
 
-    public IPLRecordDAO(String player, int runs, double strikeRate, double average, int fours, int six, int wkts, int fourWkts, int fiveWkts) {
+    public IPLRecordDAO(String player, int runs, double strikeRate, double battingAverage, int fours, int six, int wkts, int fourWkts, int fiveWkts, double bowlingAverage) {
         this.player = player;
         this.runs = runs;
         this.strikeRate = strikeRate;
-        this.average = average;
+        this.battingAverage = battingAverage;
+        this.bowlingAverage = bowlingAverage;
         this.fours = fours;
         this.six = six;
         this.wkts = wkts;
