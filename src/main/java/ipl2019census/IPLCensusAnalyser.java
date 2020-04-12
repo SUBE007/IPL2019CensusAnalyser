@@ -61,11 +61,11 @@ public class IPLCensusAnalyser {
                     .forEach(mostWktsCSV -> runCSVMap.put(mostWktsCSV.player, new IPLRecordDAO(mostWktsCSV)));
             return runCSVMap.size();
         } catch (IOException e) {
-            throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.NO_CENSUS_DATA);
+            throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.NO_SUCH_FILE);
         } catch (CSVBuilderException e) {
             throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.CENSUS_FILE_PROBLEM);
         } catch (RuntimeException e) {
-            throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.INTERNAL_FILE_PROBLEM);
+            throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.HEADER_PROBLEM);
         }
     }
 }
