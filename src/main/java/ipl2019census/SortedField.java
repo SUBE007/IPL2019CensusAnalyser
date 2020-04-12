@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class SortedField {
     public enum Field {
-        AVERAGE,STRIKE_RATE,SIXES_AND_FOURS,CENTUARY, FOURS, HALFCENTUARY, HIGHSCORE, SIX, RUN,AVGBOWL_WITH_STRIKERATE,
+        AVERAGE,STRIKE_RATE,SIXES_AND_FOURS, WKT_WITH_AVG, FOURS, HALFCENTUARY, HIGHSCORE, SIX, RUN,AVGBOWL_WITH_STRIKERATE,
         SIX_AND_FOUR_WITH_STRIKERATE,GREATAVG_WITH_STRIKERATE,MAXRUN_WITH_GREATAVG,ECONOMY,FIVEWKT_FOURWKT_STRIKERATE;
     }
     static Map<Field, Comparator> sortFieldComparator = new HashMap<>();
@@ -22,9 +22,11 @@ public class SortedField {
         Comparator<IPLRecordDAO> strikeRateComparator = Comparator.comparing(census -> census.strikeRate);
         Comparator<IPLRecordDAO> maxrunComparator = Comparator.comparing(census -> census.runs);
         Comparator<IPLRecordDAO> economyComparator = Comparator.comparing(census -> census.economy);
+        Comparator<IPLRecordDAO> wktComparator = Comparator.comparing(mostRunCSV -> mostRunCSV.wkts);
         sortFieldComparator.put(Field.AVERAGE, averageComparator);
         sortFieldComparator.put(Field.STRIKE_RATE, strikeRateComparator);
         sortFieldComparator.put(Field.ECONOMY, economyComparator);
+        sortFieldComparator.put(Field.WKT_WITH_AVG, wktComparator.thenComparing(averageComparator));
         sortFieldComparator.put(Field.SIXES_AND_FOURS, new FieldComparator());
         sortFieldComparator.put(Field.MAXRUN_WITH_GREATAVG, maxrunComparator.thenComparing(averageComparator));
         sortFieldComparator.put(Field.AVGBOWL_WITH_STRIKERATE, averageComparator.thenComparing(averageComparator));
