@@ -1,5 +1,6 @@
 package ipl2019census;
 
+import adapter.IPLAdapterFactory;
 import com.google.gson.Gson;
 import csvbuilderfiles.CSVBuilderFactory;
 import csvbuilderfiles.ICSVBuilder;
@@ -18,6 +19,15 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IPLCensusAnalyser {
+    public SortedField.IPLEntity iplEntity;
+    Map<String, IPLRecordDAO> runCSVMap;
+    public IPLCensusAnalyser(SortedField.IPLEntity iplEntity) {
+        this.iplEntity = iplEntity;
+    }
+    public IPLCensusAnalyser() {
+        this.runCSVMap = new HashMap<String, IPLRecordDAO>();
+    }
+
     public <T> int loadIPLMostRunsData(String csvFilePath) throws IPLCSVException {
         int count = 0;
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
@@ -38,7 +48,12 @@ public class IPLCensusAnalyser {
         return 0;
     }
 
-    public static Map<String, IPLRecordDAO> runCSVMap = new HashMap<>();
+    public <T> int loadIPLData(String... csvFilePath) throws IPLCSVException {
+        runCSVMap = new IPLAdapterFactory().cricketleagueFactory(iplEntity, csvFilePath);
+        return runCSVMap.size();
+    }
+
+   // public static Map<String, IPLRecordDAO> runCSVMap = new HashMap<>();
     public String getSortedDataOfIpl(SortedField.Field field) throws IPLCSVException {
         Comparator<IPLRecordDAO> censusComparator = null;
         if (runCSVMap == null || runCSVMap.size() == 0) {
