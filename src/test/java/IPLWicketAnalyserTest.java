@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import dao.MostRunCSV;
 import dao.MostWktCSV;
 import exception.IPLCSVException;
 import ipl2019census.IPLCensusAnalyser;
@@ -13,6 +14,7 @@ public class IPLWicketAnalyserTest {
     public static String  WRONG_CSV_FILE_PATH="E:\\BridgrLabz\\IPL2019Census\\src\\IPL2019FactsheetMostWkts.csv";
     public static String IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH_WRONGDELIMETER="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostWktsWithWrongDelimiter.csv";
     public static String IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH_WITHOUTHEADER="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostWktsWithoutHeader.csv";
+    public static String IPL_CENSUS_CSV_MOSTRUNS_FILEPATH="E:\\BridgrLabz\\IPL2019Census\\src\\test\\resources\\IPL2019FactsheetMostRuns.csv";
 
     IPLCensusAnalyser censusAnalyser;
 
@@ -148,6 +150,19 @@ public class IPLWicketAnalyserTest {
             String iplpLayersRecords = censusAnalyser.getSortedDataOfIpl(SortedField.Field.BATTING_BLOWING_AVG);
             MostWktCSV[] mostRunCSVS = new Gson().fromJson(iplpLayersRecords, MostWktCSV[].class);
             Assert.assertEquals("Mayank Markande", mostRunCSVS[mostRunCSVS.length - 1].player);
+        } catch (IPLCSVException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLMostWktsCSVFile_WhenSortedOnALLRounders_ShouldReturnCorrectSortedData() {
+        try {
+            IPLCensusAnalyser iplAnalyser = new IPLCensusAnalyser(SortedField.IPLEntity.BATING);
+            iplAnalyser.loadIPLData(IPL_CENSUS_CSV_MOSTRUNS_FILEPATH, IPL_CENSUS_CSV_MOSTWICKETS_CSV_FILEPATH);
+            String iplPLayersRecord = iplAnalyser.getSortedDataOfIpl(SortedField.Field.IPL_BEST_ALLROUNDER);
+            MostRunCSV[] mostRunCSVS = new Gson().fromJson(iplPLayersRecord, MostRunCSV[].class);
+            Assert.assertEquals("Hardik Pandya", mostRunCSVS[mostRunCSVS.length - 1].player);
         } catch (IPLCSVException e) {
             e.printStackTrace();
         }
