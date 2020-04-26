@@ -20,7 +20,6 @@ public class IPLRecordDAO {
 
     public IPLRecordDAO(MostRunCSV mostRunCSV) {
         player = mostRunCSV.player;
-        //runs = mostRunCSV.run;
         batsmanRun = mostRunCSV.run;
         strikeRate = mostRunCSV.strikeRate;
         battingAverage = mostRunCSV.avg;
@@ -30,7 +29,6 @@ public class IPLRecordDAO {
 
     public IPLRecordDAO(MostWktCSV mostWktsCSV) {
         player = mostWktsCSV.player;
-        //runs = mostWktsCSV.runs;
         bowlerRun = mostWktsCSV.runs;
         strikeRate = mostWktsCSV.strikeRate;
         bowlingAverage = mostWktsCSV.average;

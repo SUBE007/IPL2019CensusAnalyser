@@ -27,7 +27,7 @@ public class SortedField {
         Comparator<IPLRecordDAO> avgBatComparator = Comparator.comparing(census -> census.battingAverage);
         Comparator<IPLRecordDAO> avgBolComparator = Comparator.comparing(census -> census.bowlingAverage);
         Comparator<IPLRecordDAO> strikeRateComparator = Comparator.comparing(census -> census.strikeRate);
-        // Comparator<IPLRecordDAO> maxrunComparator = Comparator.comparing(census -> census.runs);
+      //  Comparator<IPLRecordDAO> maxrunComparator = Comparator.comparing(census -> census.runs);
         Comparator<IPLRecordDAO> batRunComparator = Comparator.comparing(mostRunCSV -> mostRunCSV.batsmanRun);
         Comparator<IPLRecordDAO> bowlRunComparator = Comparator.comparing(mostRunCSV -> mostRunCSV.batsmanRun);
         Comparator<IPLRecordDAO> economyComparator = Comparator.comparing(census -> census.economy);

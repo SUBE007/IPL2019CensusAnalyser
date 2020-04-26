@@ -28,9 +28,8 @@ public class IPLCensusAnalyser {
         this.runCSVMap = new HashMap<String, IPLRecordDAO>();
     }
 
-    public <T> int loadIPLMostRunsData(String csvFilePath) throws IPLCSVException {
-        int count = 0;
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
+    public <T>int loadIPLMostRunsData(String csvFilePath) throws IPLCSVException {
+         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator mostRunCSVIterator = csvBuilder.getCSVFileIterator(reader, MostRunCSV.class);
             Iterable<T> mostRunCSVIterable = () -> mostRunCSVIterator;
@@ -43,9 +42,9 @@ public class IPLCensusAnalyser {
         } catch (CSVBuilderException e) {
             throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.INTERNAL_FILE_PROBLEM);
         } catch (RuntimeException e) {
-            e.printStackTrace();
+            throw new IPLCSVException(e.getMessage(), IPLCSVException.ExceptionType.HEADER_PROBLEM);
         }
-        return 0;
+
     }
 
     public <T> int loadIPLData(String... csvFilePath) throws IPLCSVException {
